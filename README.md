@@ -1,5 +1,11 @@
 # bash-cbz-merger
 
+### Download
+```
+$ wget https://raw.githubusercontent.com/jmattheis/bash-cbz-merger/master/cbz-merger.sh
+$ chmod +x cbz-merger.sh
+```
+### Usage
 ```bash
 NAME:
     cbz-merger.sh Merges cbz files.
