@@ -58,6 +58,10 @@ case $parameter in
     OVERRIDE="yes"
     shift
     ;;
+    --chronological)
+    CHRONOLOGICAL="yes"
+    shift
+    ;;
     -h|--help)
 cat << EOF
 NAME:
@@ -135,7 +139,12 @@ fi
 
 mkdir -p "$TEMP_DIR"
 
-FILES=$(ls -rt "$INPUT"/*$EXTENSION)
+if [ "$CHRONOLOGICAL" ]; then
+    FILES=$(ls -rt "$INPUT"/*$EXTENSION)
+else
+    FILES=$(ls -v "$INPUT"/*$EXTENSION)
+fi
+
 while IFS= read -r FILE; do
     echo Processing `basename "$FILE"`
     unzip -q -d $TEMP_DIR/ "$FILE"
