@@ -135,7 +135,8 @@ fi
 
 mkdir -p "$TEMP_DIR"
 
-for FILE in "$INPUT"/*$EXTENSION; do
+FILES=$(ls -rt "$INPUT"/*$EXTENSION)
+while IFS= read -r FILE; do
     echo Processing `basename "$FILE"`
     unzip -q -d $TEMP_DIR/ "$FILE"
     for TEMP_FILE in "$TEMP_DIR"/*; do
@@ -143,5 +144,5 @@ for FILE in "$INPUT"/*$EXTENSION; do
     done
     zip -qjur "$OUTPUT_FILE" "$TEMP_DIR"
     rm -rf "$TEMP_DIR"
-done
+done <<< "$FILES"
 echo Done.
